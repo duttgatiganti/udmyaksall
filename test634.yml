@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '1e150f3f-af86-492e-8df9-9375f3966df9'
+  dockerRegistryServiceConnection: 'acr3572'
   imageRepository: 'custom1aksnginxapp1'
   containerRegistry: 'acr3572.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/19-Azure-DevOps-with-AKS/19-01-Azure-DevOps-BuildandPush-to-ACR/Git-Repository-files/Dockerfile'
