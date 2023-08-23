@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+- None
 
 resources:
 - repo: self
@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: 'fe0d4fc7-2b8b-4240-a5de-a66985e0b40e'
   imageRepository: 'custom1nginxapp1'
   containerRegistry: 'acr3572.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -37,17 +37,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - bash: echo Contents in System Default Working Directory; ls -R $(System.DefaultWorkingDirectory)        
-    - bash: echo Before copying Contents in Build Artifact Directory; ls -R $(Build.ArtifactStagingDirectory)        
-    # Task-2: Copy files (Copy files from a source folder to target folder)
-    # Source Directory: $(System.DefaultWorkingDirectory)/kube-manifests
-    # Target Directory: $(Build.ArtifactStagingDirectory)
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)/kube-manifests'
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-        OverWrite: true
+    
     # Task-3: Publish build artifacts (Publish build to Azure Pipelines)  
     - task: PublishBuildArtifacts@1
       inputs:
